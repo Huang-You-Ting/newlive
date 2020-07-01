@@ -16,101 +16,11 @@
     <Filter Include="Source files\Device-specific files">
       <UniqueIdentifier>{cfca93ed-58e3-4a28-9d58-bc99084f809a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\Device-specific files\BLE Advertising Module">
-      <UniqueIdentifier>{93168362-8d63-4a8e-9f9a-c62058b63890}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\BLE Battery Service">
-      <UniqueIdentifier>{1ef36e89-e14d-4e7f-be20-eb4d553eb5bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\BLE Common">
-      <UniqueIdentifier>{2f9dfdbb-8452-4c59-b0c6-7cf5c3c98c3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\BLE Device Information Service">
-      <UniqueIdentifier>{43cb8f8e-0914-40e7-9390-4ea07cf11b27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\BLE Queued Writes module">
-      <UniqueIdentifier>{578a7cc5-ac96-4981-9e8c-981107d973f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\GATT">
-      <UniqueIdentifier>{5b41a1ff-7fe6-4252-8c18-47de203f16b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\Legacy Peripheral Drivers">
-      <UniqueIdentifier>{ab3897ea-ae94-4e49-8762-af16a8e45c6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\Utils">
-      <UniqueIdentifier>{9cdd96f6-44ce-48bb-9d4b-51f30ec7419a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\Boards">
-      <UniqueIdentifier>{baaf9044-99e7-48fe-b8bb-af0d1c171345}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\Libraries">
-      <UniqueIdentifier>{58f8c599-c281-4f9f-85e3-036927acc9b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\Peer Manager">
-      <UniqueIdentifier>{5abdf38a-db0e-45e5-aebc-e70578d7f023}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\Peripheral Drivers">
-      <UniqueIdentifier>{1e97c720-8231-4e0d-9ab2-e76e338eb1f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\Peripheral Drivers (Old)">
-      <UniqueIdentifier>{d0c165df-22c1-4148-9729-7b47be1639d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header files\Device-specific files">
       <UniqueIdentifier>{d20d409b-7a56-41fd-a533-4d4884aa4757}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header files\Device-specific files\BLE Advertising Module">
-      <UniqueIdentifier>{e80ac22a-a81a-471f-93c9-aca70dd302f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\BLE Battery Service">
-      <UniqueIdentifier>{4db72ae3-1551-40ad-9b88-85a3979c0158}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\BLE Common">
-      <UniqueIdentifier>{318d502f-7a72-44ca-8651-7bfca54910d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\BLE Device Information Service">
-      <UniqueIdentifier>{200886f3-6757-4150-9adc-1969b4f82785}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\BLE Queued Writes module">
-      <UniqueIdentifier>{720512cd-3785-4457-99eb-228221540cdc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\GATT">
-      <UniqueIdentifier>{55ee7261-1091-4e0d-936b-7da56ddd8488}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Legacy Peripheral Drivers">
-      <UniqueIdentifier>{335c3d2e-4f73-4292-b01a-7bba1194ec42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Utils">
-      <UniqueIdentifier>{fdc5e6b0-a2c3-40ca-94a3-8460a32fe014}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Boards">
-      <UniqueIdentifier>{b4867066-4b3d-475d-a89f-93132ce1394a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Libraries">
-      <UniqueIdentifier>{1e86e5de-1edf-49c8-aeca-2c377c0d4528}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Peer Manager">
-      <UniqueIdentifier>{54dda806-1f9f-46cf-909c-0ad0c3082aea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Peripheral Drivers">
-      <UniqueIdentifier>{49ffefc1-0346-4ce3-96fc-80073db891de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\Peripheral Drivers (Old)">
-      <UniqueIdentifier>{121b83be-185a-4e72-82ae-fe5e45666ceb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VisualGDB settings">
       <UniqueIdentifier>{07aebedf-b28f-4c68-82ec-30a8b58177a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\FreeRTOS">
-      <UniqueIdentifier>{91207783-ce3b-4470-a7f4-97abccc2b9dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\FreeRTOS">
-      <UniqueIdentifier>{442af25c-ec3e-439b-baae-627d93c75bc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\ExternalLibraries">
-      <UniqueIdentifier>{e132aeec-1683-4981-a7b6-ae15676b5ca3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\ExternalLibraries">
-      <UniqueIdentifier>{942a9e57-556b-49ab-84b2-af9a524283e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -667,9 +577,6 @@
       <Filter>Header files\Device-specific files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\nrf_assert.h">
-      <Filter>Header files\Device-specific files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\nrf_bitmask.h">
       <Filter>Header files\Device-specific files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\sdk_alloca.h">
