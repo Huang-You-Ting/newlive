@@ -13,8 +13,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{70EB44FA-E157-4C8D-8999-D7C04BB52D77}</ProjectGuid>
-    <BSP_ID>com.sysprogs.arm.nordic.nrf5x</BSP_ID>
+    <BSP_ID>com.visualgdb.bsp.in-place</BSP_ID>
     <BSP_VERSION>16.0</BSP_VERSION>
+    <InPlaceBSPSubdir>../</InPlaceBSPSubdir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
@@ -122,7 +123,6 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\ringbuf\nrf_ringbuf.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\scheduler\app_scheduler.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\sensorsim\sensorsim.c" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\serial\nrf_serial.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\sortlist\nrf_sortlist.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\strerror\nrf_strerror.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\uart\app_uart.c" />
@@ -248,7 +248,6 @@
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\app_util_platform.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\nordic_common.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\nrf_assert.h" />
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\nrf_bitmask.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\sdk_alloca.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\sdk_common.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\util\sdk_errors.h" />
