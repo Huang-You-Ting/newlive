@@ -82,6 +82,9 @@
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 
+#include "nrf_sdh_freertos.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 #define DEVICE_NAME                     "Nordic_Template"                       /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME               "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
@@ -652,7 +655,7 @@ static void buttons_leds_init(bool * p_erase_bonds)
  */
 static void log_init(void)
 {
-    ret_code_t err_code = NRF_LOG_INIT(NULL);
+    ret_code_t err_code = NRF_LOG_INIT(xTaskGetTickCount, configTICK_RATE_HZ);
     APP_ERROR_CHECK(err_code);
 
     NRF_LOG_DEFAULT_BACKENDS_INIT();
@@ -699,36 +702,33 @@ static void advertising_start(bool erase_bonds)
     }
 }
 
-
-/**@brief Function for application main entry.
- */
-int main(void)
-{
+static void prvCreateSetupTask(void *pContext) {
     bool erase_bonds;
-
     // Initialize.
-    log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
     power_management_init();
-    ble_stack_init();
     gap_params_init();
     gatt_init();
     advertising_init();
     services_init();
     conn_params_init();
     peer_manager_init();
-
     // Start execution.
     NRF_LOG_INFO("Template example started.");
     application_timers_start();
-
     advertising_start(erase_bonds);
+}
 
-    // Enter main loop.
-    for (;;)
-    {
-        idle_state_handle();
+/**@brief Function for application main entry.
+ */
+int main(void) {
+    log_init();
+    ble_stack_init();
+    nrf_sdh_freertos_init(prvCreateSetupTask, NULL);
+    vTaskStartScheduler();
+    for (;;) {
+        __BKPT(255);
     }
 }
 

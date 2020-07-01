@@ -28,12 +28,6 @@
     <Filter Include="Source files\Device-specific files\BLE Device Information Service">
       <UniqueIdentifier>{43cb8f8e-0914-40e7-9390-4ea07cf11b27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\Device-specific files\BLE Human Interface Device Service">
-      <UniqueIdentifier>{f6b85f14-ac94-4ff4-8775-235f349acb00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source files\Device-specific files\BLE Link Context Manager">
-      <UniqueIdentifier>{431e5094-bee3-4856-a0dd-85c91d07b62e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source files\Device-specific files\BLE Queued Writes module">
       <UniqueIdentifier>{578a7cc5-ac96-4981-9e8c-981107d973f1}</UniqueIdentifier>
     </Filter>
@@ -76,12 +70,6 @@
     <Filter Include="Header files\Device-specific files\BLE Device Information Service">
       <UniqueIdentifier>{200886f3-6757-4150-9adc-1969b4f82785}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header files\Device-specific files\BLE Human Interface Device Service">
-      <UniqueIdentifier>{c0f36dd6-2320-4ebd-9b18-c1f465e36b15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files\BLE Link Context Manager">
-      <UniqueIdentifier>{123bcce0-9a6d-4072-9b79-63c039377e15}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header files\Device-specific files\BLE Queued Writes module">
       <UniqueIdentifier>{720512cd-3785-4457-99eb-228221540cdc}</UniqueIdentifier>
     </Filter>
@@ -111,6 +99,18 @@
     </Filter>
     <Filter Include="VisualGDB settings">
       <UniqueIdentifier>{07aebedf-b28f-4c68-82ec-30a8b58177a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Device-specific files\FreeRTOS">
+      <UniqueIdentifier>{91207783-ce3b-4470-a7f4-97abccc2b9dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files\FreeRTOS">
+      <UniqueIdentifier>{442af25c-ec3e-439b-baae-627d93c75bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Device-specific files\ExternalLibraries">
+      <UniqueIdentifier>{e132aeec-1683-4981-a7b6-ae15676b5ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files\ExternalLibraries">
+      <UniqueIdentifier>{942a9e57-556b-49ab-84b2-af9a524283e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -146,12 +146,6 @@
     </ClCompile>
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_dis\ble_dis.c">
       <Filter>Source files\Device-specific files\BLE Device Information Service</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_hids\ble_hids.c">
-      <Filter>Source files\Device-specific files\BLE Human Interface Device Service</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c">
-      <Filter>Source files\Device-specific files\BLE Link Context Manager</Filter>
     </ClCompile>
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\nrf_ble_qwr\nrf_ble_qwr.c">
       <Filter>Source files\Device-specific files\BLE Queued Writes module</Filter>
@@ -307,12 +301,6 @@
       <Filter>Source files\Device-specific files\Libraries</Filter>
     </ClCompile>
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\strerror\nrf_strerror.c">
-      <Filter>Source files\Device-specific files\Libraries</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\app_timer2.c">
-      <Filter>Source files\Device-specific files\Libraries</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\drv_rtc.c">
       <Filter>Source files\Device-specific files\Libraries</Filter>
     </ClCompile>
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\uart\app_uart.c">
@@ -575,12 +563,6 @@
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_dis\ble_dis.h">
       <Filter>Header files\Device-specific files\BLE Device Information Service</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_hids\ble_hids.h">
-      <Filter>Header files\Device-specific files\BLE Human Interface Device Service</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.h">
-      <Filter>Header files\Device-specific files\BLE Link Context Manager</Filter>
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\nrf_ble_qwr\nrf_ble_qwr.h">
       <Filter>Header files\Device-specific files\BLE Queued Writes module</Filter>
@@ -925,9 +907,6 @@
       <Filter>Header files\Device-specific files\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\strerror\nrf_strerror.h">
-      <Filter>Header files\Device-specific files\Libraries</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\drv_rtc.h">
       <Filter>Header files\Device-specific files\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\uart\app_uart.h">
@@ -1428,5 +1407,145 @@
     <None Include="nrf5x.xml">
       <Filter>VisualGDB settings</Filter>
     </None>
+    <None Include="$(BSP_ROOT)\nRF5x\external\freertos\source\readme.txt">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </None>
+    <None Include="$(BSP_ROOT)\nRF5x\external\freertos\license\license.txt">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </None>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\CMSIS\nrf52\port_cmsis.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\CMSIS\nrf52\port_cmsis_systick.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\GCC\nrf52\port.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\croutine.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\event_groups.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\list.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\queue.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\stream_buffer.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\tasks.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\timers.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\portable\MemMang\heap_4.c">
+      <Filter>Source files\Device-specific files\FreeRTOS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\softdevice\common\nrf_sdh_freertos.c">
+      <Filter>Source files\Device-specific files\Libraries</Filter>
+    </ClCompile>
+    <ClInclude Include="FreeRTOSConfig.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\config\FreeRTOSConfig.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\CMSIS\nrf52\portmacro_cmsis.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\GCC\nrf52\portmacro.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\croutine.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\deprecated_definitions.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\event_groups.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\FreeRTOS.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\list.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\message_buffer.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\mpu_prototypes.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\mpu_wrappers.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\portable.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\projdefs.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\queue.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\semphr.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\StackMacros.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\stack_macros.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\stream_buffer.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\task.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\timers.h">
+      <Filter>Header files\Device-specific files\FreeRTOS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\softdevice\common\nrf_sdh_freertos.h">
+      <Filter>Header files\Device-specific files\Libraries</Filter>
+    </ClInclude>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\app_timer_freertos.c">
+      <Filter>Source files\Device-specific files\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\integration\nrfx\legacy\nrf_drv_clock.c">
+      <Filter>Source files\Device-specific files\Legacy Peripheral Drivers</Filter>
+    </ClCompile>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\integration\nrfx\legacy\nrf_drv_clock.h">
+      <Filter>Header files\Device-specific files\Legacy Peripheral Drivers</Filter>
+    </ClInclude>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT.c">
+      <Filter>Source files\Device-specific files\ExternalLibraries</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_printf.c">
+      <Filter>Source files\Device-specific files\ExternalLibraries</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Syscalls_GCC.c">
+      <Filter>Source files\Device-specific files\ExternalLibraries</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Syscalls_SES.c">
+      <Filter>Source files\Device-specific files\ExternalLibraries</Filter>
+    </ClCompile>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT.h">
+      <Filter>Header files\Device-specific files\ExternalLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Conf.h">
+      <Filter>Header files\Device-specific files\ExternalLibraries</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app_config.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
