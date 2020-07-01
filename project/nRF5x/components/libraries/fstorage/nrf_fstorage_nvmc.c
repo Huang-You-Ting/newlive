@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
+ * Copyright (c) 2016 - 2020, Nordic Semiconductor ASA
  *
  * All rights reserved.
  *
@@ -115,7 +115,7 @@ static ret_code_t uninit(nrf_fstorage_t * p_fs, void * p_param)
 }
 
 
-static ret_code_t read_impl(nrf_fstorage_t const * p_fs, uint32_t src, void * p_dest, uint32_t len)
+static ret_code_t read(nrf_fstorage_t const * p_fs, uint32_t src, void * p_dest, uint32_t len)
 {
     UNUSED_PARAMETER(p_fs);
 
@@ -125,7 +125,7 @@ static ret_code_t read_impl(nrf_fstorage_t const * p_fs, uint32_t src, void * p_
 }
 
 
-static ret_code_t write_impl(nrf_fstorage_t const * p_fs,
+static ret_code_t write(nrf_fstorage_t const * p_fs,
                         uint32_t               dest,
                         void           const * p_src,
                         uint32_t               len,
@@ -205,8 +205,8 @@ nrf_fstorage_api_t nrf_fstorage_nvmc =
 {
     .init    = init,
     .uninit  = uninit,
-    .read    = read_impl,
-    .write   = write_impl,
+    .read    = read,
+    .write   = write,
     .erase   = erase,
     .rmap    = rmap,
     .wmap    = wmap,

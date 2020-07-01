@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 - 2019, Nordic Semiconductor ASA
+ * Copyright (c) 2017 - 2020, Nordic Semiconductor ASA
  *
  * All rights reserved.
  *
@@ -51,7 +51,7 @@
 #include "nrf_log.h"
 NRF_LOG_MODULE_REGISTER();
 
-#define NRF_BLE_FREERTOS_SDH_TASK_STACK 1024
+#define NRF_BLE_FREERTOS_SDH_TASK_STACK 256
 
 
 static TaskHandle_t                 m_softdevice_task;  //!< Reference to SoftDevice FreeRTOS task.

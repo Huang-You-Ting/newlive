@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 - 2019, Nordic Semiconductor ASA
+ * Copyright (c) 2016 - 2020, Nordic Semiconductor ASA
  *
  * All rights reserved.
  *
@@ -52,7 +52,7 @@
 #include "nrf_drv_rng.h"
 #include "ecc.h"
 
-//#include "uECC.h"
+#include "uECC.h"
 
 
 static int ecc_rng(uint8_t *dest, unsigned size)
