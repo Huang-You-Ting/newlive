@@ -123,7 +123,6 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\ringbuf\nrf_ringbuf.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\scheduler\app_scheduler.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\sensorsim\sensorsim.c" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\serial\nrf_serial.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\sortlist\nrf_sortlist.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\strerror\nrf_strerror.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\uart\app_uart.c" />
