@@ -41,7 +41,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
       <CLanguageStandard>GNU99</CLanguageStandard>
+      <AdditionalIncludeDirectories>;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG=1;USE_APP_CONFIG;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <LibrarySearchDirectories>;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
+      <AdditionalLibraryNames>;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
+      <LinkerScript />
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ClCompile>
@@ -65,8 +73,6 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\common\ble_conn_state.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\common\ble_srv_common.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_dis\ble_dis.c" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_hids\ble_hids.c" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\nrf_ble_qwr\nrf_ble_qwr.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\nrf_ble_gatt\nrf_ble_gatt.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\integration\nrfx\legacy\nrf_drv_power.c" />
@@ -119,8 +125,6 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\serial\nrf_serial.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\sortlist\nrf_sortlist.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\strerror\nrf_strerror.c" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\app_timer2.c" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\drv_rtc.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\uart\app_uart.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\uart\retarget.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\softdevice\common\nrf_sdh.c" />
@@ -179,6 +183,7 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\hal\nrf_ecb.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\hal\nrf_nvmc.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\soc\nrfx_atomic.c" />
+    <ClInclude Include="app_config.h" />
     <ClInclude Include="sdk_config.h" />
     <ClInclude Include="nrf_peripherals.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\toolchain\cmsis\include\arm_common_tables.h" />
@@ -208,8 +213,6 @@
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\common\ble_sensor_location.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\common\ble_srv_common.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_dis\ble_dis.h" />
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_hids\ble_hids.h" />
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\nrf_ble_qwr\nrf_ble_qwr.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\nrf_ble_gatt\nrf_ble_gatt.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\integration\nrfx\nrfx_config.h" />
@@ -325,7 +328,6 @@
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\serial\nrf_serial.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\sortlist\nrf_sortlist.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\strerror\nrf_strerror.h" />
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\drv_rtc.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\libraries\uart\app_uart.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\softdevice\common\nrf_sdh.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\softdevice\common\nrf_sdh_ant.h" />
@@ -492,5 +494,52 @@
     <None Include="application-Debug.vgdbsettings" />
     <None Include="application-Release.vgdbsettings" />
     <None Include="nrf5x.xml" />
+    <None Include="$(BSP_ROOT)\nRF5x\external\freertos\source\readme.txt" />
+    <None Include="$(BSP_ROOT)\nRF5x\external\freertos\license\license.txt" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\CMSIS\nrf52\port_cmsis.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\CMSIS\nrf52\port_cmsis_systick.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\GCC\nrf52\port.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\croutine.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\event_groups.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\list.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\queue.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\stream_buffer.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\tasks.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\timers.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\freertos\source\portable\MemMang\heap_4.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\softdevice\common\nrf_sdh_freertos.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClInclude Include="FreeRTOSConfig.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\config\FreeRTOSConfig.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\CMSIS\nrf52\portmacro_cmsis.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\GCC\nrf52\portmacro.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\croutine.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\deprecated_definitions.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\event_groups.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\FreeRTOS.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\list.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\message_buffer.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\mpu_prototypes.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\mpu_wrappers.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\portable.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\projdefs.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\queue.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\semphr.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\StackMacros.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\stack_macros.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\stream_buffer.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\task.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\timers.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\components\softdevice\common\nrf_sdh_freertos.h" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\components\libraries\timer\app_timer_freertos.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\integration\nrfx\legacy\nrf_drv_clock.c" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\integration\nrfx\legacy\nrf_drv_clock.h" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_printf.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Syscalls_GCC.c" />
+    <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Syscalls_SES.c" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT.h" />
+    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Conf.h" />
   </ItemGroup>
 </Project>

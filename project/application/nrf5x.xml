@@ -41,39 +41,45 @@
   <BSPSourceFolderName>Device-specific files</BSPSourceFolderName>
   <MCUMakFile>nrf5x.mak</MCUMakFile>
   <ReferencedFrameworks>
-    <string>com.sysprogs.arm.nordic.nrf5x.drivers_nrf</string>
-    <string>com.sysprogs.arm.nordic.nrf5x.util</string>
-    <string>com.sysprogs.arm.nordic.nrf5x.peerm</string>
+    <string>com.sysprogs.arm.nordic.nrfx.ble_advertising</string>
+    <string>com.sysprogs.arm.nordic.nrfx.ble_bas</string>
+    <string>com.sysprogs.arm.nordic.nrf5x.ble_common</string>
+    <string>com.sysprogs.arm.nordic.nrfx.ble_dis</string>
+    <string>com.sysprogs.arm.nordic.nrfx.nrf_ble_qwr</string>
+    <string>com.sysprogs.arm.nordic.nrf51.freertos</string>
     <string>com.sysprogs.arm.nordic.nrf5x.gatt</string>
+    <string>com.sysprogs.arm.nordic.nrf5x.periph_legacy</string>
+    <string>com.sysprogs.arm.nordic.nrf5x.util</string>
     <string>com.sysprogs.arm.nordic.nrf5x.boards</string>
     <string>com.sysprogs.arm.nordic.nrf5x.libraries</string>
-    <string>com.sysprogs.arm.nordic.nrf5x.ble_common</string>
-    <string>com.sysprogs.arm.nordic.nrfx.ble_advertising</string>
+    <string>com.sysprogs.arm.nordic.nrf5x.libraries.external</string>
+    <string>com.sysprogs.arm.nordic.nrf5x.peerm</string>
     <string>com.sysprogs.arm.nordic.nrf5x.modules_nrfx</string>
-    <string>com.sysprogs.arm.nordic.nrf5x.ble_link_ctx_manager</string>
-    <string>com.sysprogs.arm.nordic.nrfx.nrf_ble_qwr</string>
-    <string>com.sysprogs.arm.nordic.nrf5x.periph_legacy</string>
-    <string>com.sysprogs.arm.nordic.nrfx.ble_bas</string>
-    <string>com.sysprogs.arm.nordic.nrfx.ble_dis</string>
-    <string>com.sysprogs.arm.nordic.nrfx.ble_hids</string>
+    <string>com.sysprogs.arm.nordic.nrf5x.drivers_nrf</string>
   </ReferencedFrameworks>
   <FrameworkProperties>
     <Entries>
       <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.nrf_soc_nosd</Key>
+        <Key>com.sysprogs.bspoptions.stm32.freertos.heap</Key>
+        <Value>heap_4</Value>
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.radio_config</Key>
-      </KeyValue>
-      <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.sdio</Key>
-      </KeyValue>
-      <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.spi_master</Key>
-      </KeyValue>
-      <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.twi_master</Key>
+        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.spi</Key>
         <Value>none</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.swi</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.twi</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.uart</Key>
+        <Value>yes</Value>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.clock</Key>
+        <Value>yes</Value>
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.bspoptions.nrf5x.board.bsp_mode</Key>
@@ -81,11 +87,11 @@
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.bspoptions.nrf5x.board.bsp_uart</Key>
-        <Value>BSP_UART_SUPPORT</Value>
+        <Value />
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.bspoptions.nrf5x.board.type</Key>
-        <Value>PCA10040</Value>
+        <Value>PCA10056</Value>
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.bspoptions.nrf5x.libraries.atomic_fifo</Key>
@@ -279,7 +285,7 @@
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.bspoptions.nrf5x.libraries.timer</Key>
-        <Value>normal</Value>
+        <Value>freertos</Value>
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.bspoptions.nrf5x.libraries.twi_mngr</Key>
@@ -299,21 +305,66 @@
         <Value>yes</Value>
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.spi</Key>
-        <Value>none</Value>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.cifra_AES128-EAX</Key>
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.swi</Key>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.cJSON</Key>
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.twi</Key>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.fatfs</Key>
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.uart</Key>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.fnmatch</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.nano</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.nano-pb</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.nfc_adafruit_library</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.nrf_cc310_bl</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.nrf_cc310</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.nrf_oberon</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.protothreads</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.segger_rtt</Key>
         <Value>yes</Value>
       </KeyValue>
       <KeyValue>
-        <Key>com.sysprogs.bspoptions.nrf5x.legacy_drivers.clock</Key>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.thedotfactory_fonts</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.tile</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.libraries.external.utf_converter</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.nrf_soc_nosd</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.radio_config</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.sdio</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.spi_master</Key>
+      </KeyValue>
+      <KeyValue>
+        <Key>com.sysprogs.bspoptions.nrf5x.drivers_nrf.twi_master</Key>
+        <Value>none</Value>
       </KeyValue>
       <KeyValue>
         <Key>com.sysprogs.bspoptions.nrf5x.libraries.experimental_memobj</Key>
