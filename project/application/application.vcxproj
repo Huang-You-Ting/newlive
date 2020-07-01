@@ -42,14 +42,17 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
       <CLanguageStandard>GNU99</CLanguageStandard>
-      <AdditionalIncludeDirectories>;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../nRF5x/components/ble/ble_link_ctx_manager;../nRF5x/components/ble/ble_services/ble_nus;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG=1;USE_APP_CONFIG;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions />
+      <CPPLanguageStandard />
     </ClCompile>
     <Link>
-      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
-      <LibrarySearchDirectories>;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
-      <AdditionalLibraryNames>;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
+      <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <LibrarySearchDirectories>%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
+      <AdditionalLibraryNames>%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
       <LinkerScript />
+      <AdditionalOptions />
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
@@ -63,6 +66,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="..\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c" />
+    <ClCompile Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.c" />
     <ClCompile Include="main.c" />
     <None Include="nrf5x.props" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\mdk\system_nrf52840.c" />
@@ -183,6 +188,8 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\hal\nrf_ecb.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\hal\nrf_nvmc.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\soc\nrfx_atomic.c" />
+    <ClInclude Include="..\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.h" />
+    <ClInclude Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.h" />
     <ClInclude Include="app_config.h" />
     <ClInclude Include="sdk_config.h" />
     <ClInclude Include="nrf_peripherals.h" />

@@ -12,6 +12,9 @@
 #define NRF_LOG_STR_FORMATTER_TIMESTAMP_FORMAT_ENABLED  (0)
 
 #define NRF_BLE_QWR_ENABLED             (1)
+#define BLE_NUS_ENABLED                 (1)
+
+#define NRF_SDH_BLE_VS_UUID_COUNT       (1)
 
 #define NRF_SDH_BLE_GATT_MAX_MTU_SIZE   (247)
 #define NRF_SDH_BLE_GAP_DATA_LENGTH     (251)

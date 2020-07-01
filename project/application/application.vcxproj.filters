@@ -507,6 +507,12 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Syscalls_SES.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_config.h">
@@ -1443,6 +1449,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\external\segger_rtt\SEGGER_RTT_Conf.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
