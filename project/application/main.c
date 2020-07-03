@@ -64,6 +64,7 @@
 #include "ble_advdata.h"
 #include "ble_advertising.h"
 #include "ble_conn_params.h"
+#include "ble_nus.h"
 #include "nrf_sdh.h"
 #include "nrf_sdh_soc.h"
 #include "nrf_sdh_ble.h"
@@ -118,7 +119,7 @@
 NRF_BLE_GATT_DEF(m_gatt);                                                       /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                                         /**< Context for the Queued Write module.*/
 BLE_ADVERTISING_DEF(m_advertising);                                             /**< Advertising module instance. */
-
+BLE_NUS_DEF(m_nus, 1); 
 static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID;                        /**< Handle of the current connection. */
 
 /* YOUR_JOB: Declare all services structure your application is using
@@ -251,31 +252,32 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 }
 
 
-/**@brief Function for handling the YYY Service events.
- * YOUR_JOB implement a service handler function depending on the event the service you are using can generate
- *
- * @details This function will be called for all YY Service events which are passed to
- *          the application.
- *
- * @param[in]   p_yy_service   YY Service structure.
- * @param[in]   p_evt          Event received from the YY Service.
- *
- *
-static void on_yys_evt(ble_yy_service_t     * p_yy_service,
-                       ble_yy_service_evt_t * p_evt)
-{
-    switch (p_evt->evt_type)
-    {
-        case BLE_YY_NAME_EVT_WRITE:
-            APPL_LOG("[APPL]: charact written with value %s. ", p_evt->params.char_xx.value.p_str);
-            break;
-
-        default:
-            // No implementation needed.
-            break;
+static void on_nus_data_handler(ble_nus_evt_t * p_evt) {
+    switch (p_evt->type) {
+    case BLE_NUS_EVT_RX_DATA: /**< Data received. */ {
+            uint8_t *pBuf = pvPortMalloc(p_evt->params.rx_data.length + 1);
+            memcpy(pBuf, p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
+            pBuf[p_evt->params.rx_data.length] = '\0';
+            uint16_t length = p_evt->params.rx_data.length;
+            ble_nus_data_send(&m_nus, pBuf, &length, m_conn_handle);
+            vPortFree(pBuf);
+        }    
+        break;
+    case BLE_NUS_EVT_TX_RDY:/**< Service is ready to accept new data to be transmitted. */
+        NRF_LOG_INFO("BLE_NUS_EVT_TX_RDY");
+        break;
+    case BLE_NUS_EVT_COMM_STARTED: /**< Notification has been enabled. */
+        NRF_LOG_INFO("BLE_NUS_EVT_COMM_STARTED");
+        break;
+    case BLE_NUS_EVT_COMM_STOPPED: /**< Notification has been disabled. */
+        NRF_LOG_INFO("BLE_NUS_EVT_COMM_STOPPED");
+        break;
+    default:
+        // No implementation needed.
+        break;
     }
+    
 }
-*/
 
 /**@brief Function for initializing services that will be used by the application.
  */
@@ -290,28 +292,10 @@ static void services_init(void)
     err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
     APP_ERROR_CHECK(err_code);
 
-    /* YOUR_JOB: Add code to initialize the services used by the application.
-       ble_xxs_init_t                     xxs_init;
-       ble_yys_init_t                     yys_init;
-
-       // Initialize XXX Service.
-       memset(&xxs_init, 0, sizeof(xxs_init));
-
-       xxs_init.evt_handler                = NULL;
-       xxs_init.is_xxx_notify_supported    = true;
-       xxs_init.ble_xx_initial_value.level = 100;
-
-       err_code = ble_bas_init(&m_xxs, &xxs_init);
-       APP_ERROR_CHECK(err_code);
-
-       // Initialize YYY Service.
-       memset(&yys_init, 0, sizeof(yys_init));
-       yys_init.evt_handler                  = on_yys_evt;
-       yys_init.ble_yy_initial_value.counter = 0;
-
-       err_code = ble_yy_service_init(&yys_init, &yy_init);
-       APP_ERROR_CHECK(err_code);
-     */
+    ble_nus_init_t nus_init;
+    nus_init.data_handler = on_nus_data_handler;
+    err_code = ble_nus_init(&m_nus, &nus_init);
+    APP_ERROR_CHECK(err_code);    
 }
 
 
