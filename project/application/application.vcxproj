@@ -68,6 +68,7 @@
   <ItemGroup>
     <ClCompile Include="..\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c" />
     <ClCompile Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.c" />
+    <ClCompile Include="app.c" />
     <ClCompile Include="main.c" />
     <None Include="nrf5x.props" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\mdk\system_nrf52840.c" />
