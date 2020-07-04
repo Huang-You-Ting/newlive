@@ -739,7 +739,7 @@ static void prvCreateSetupTask(void *pContext) {
 
 /**@brief Function for application main entry.
  */
-int main(void) {
+int main(void) {    
     log_init();
     ble_stack_init();
     nrf_sdh_freertos_init(prvCreateSetupTask, NULL);

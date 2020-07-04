@@ -14,7 +14,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{70EB44FA-E157-4C8D-8999-D7C04BB52D77}</ProjectGuid>
     <BSP_ID>com.visualgdb.bsp.in-place</BSP_ID>
-    <BSP_VERSION>16.0</BSP_VERSION>
+    <BSP_VERSION>1.0</BSP_VERSION>
     <InPlaceBSPSubdir>../</InPlaceBSPSubdir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,8 +42,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
       <CLanguageStandard>GNU99</CLanguageStandard>
-      <AdditionalIncludeDirectories>../nRF5x/components/ble/ble_link_ctx_manager;../nRF5x/components/ble/ble_services/ble_nus;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DEBUG=1;USE_APP_CONFIG;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../nRF5x/components/softdevice/common;../nRF5x/components/softdevice/S140/headers;../nRF5x/components/softdevice/mbr/headers;../nRF5x/modules/nrfx/mdk;../nRF5x/modules/nrfx;../nRF5x/integration/nrfx;../nRF5x/modules/nrfx/hal;../nRF5x/modules/nrfx/drivers/include;../nRF5x/components/toolchain/cmsis/include;../nRF5x/components/boards;../nRF5x/components/libraries/scheduler;../nRF5x/components/libraries/timer;../nRF5x/components/libraries/strerror;../nRF5x/components/libraries/util;../nRF5x/components/libraries/balloc;../nRF5x/components/libraries/ringbuf;../nRF5x/components/libraries/bsp;../nRF5x/components/libraries/log;../nRF5x/components/libraries/button;../nRF5x/components/libraries/experimental_section_vars;../nRF5x/components/libraries/delay;../nRF5x/components/libraries/atomic_fifo;../nRF5x/components/libraries/atomic;../nRF5x/components/libraries/sortlist;../nRF5x/components/libraries/memobj;../nRF5x/components/libraries/log/src;../nRF5x/components/libraries/fds;../nRF5x/components/libraries/block_dev;../nRF5x/components/libraries/sdcard;../nRF5x/components/libraries/atomic_flags;../nRF5x/components/libraries/block_dev/sdc;../nRF5x/components/ble/ble_link_ctx_manager;../nRF5x/components/ble/ble_advertising;../nRF5x/components/ble/ble_services/ble_nus;../nRF5x/components/ble/common;../nRF5x/components/ble/peer_manager;../nRF5x/external/fatfs/port;../nRF5x/external/fprintf;../nRF5x/external/protothreads;../nRF5x/external/protothreads/pt-1.4;../nRF5x/external/freertos/Portable/ARM/nrf52;../nRF5x/external/freertos/Portable/CMSIS/nrf52;../nRF5x/external/freertos/Source/Include;../nRF5x/external/segger_rtt;../nRF5x/external/fatfs/src;../nRF5x/components/ble/nrf_ble_gatt;../nRF5x/components/ble/nrf_ble_qwr;../nRF5x/components/libraries/cli;../nRF5x/components/libraries/pwr_mgmt;../nRF5x/components/libraries/queue;../nRF5x/components/libraries/sensorsim;../nRF5x/components/libraries/fstorage;../nRF5x/components/libraries/mutex;../nRF5x/integration/nrfx/legacy;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG;USE_APP_CONFIG;NRF52840_XXAA;S140;CONFIG_GPIO_AS_PINRESET;NRF_DFU_SETTINGS_VERSION=2;NRF_SD_BLE_API_VERSION=7;ARM_MATH_CM4;BLE_STACK_SUPPORT_REQD;USE_FREERTOS;BOARD_PCA10056;SOFTDEVICE_PRESENT;DEBUG=1;NRF_DRV_SPI_WITH_SPIM;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions />
       <CPPLanguageStandard />
     </ClCompile>
@@ -68,11 +68,16 @@
   <ItemGroup>
     <ClCompile Include="..\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c" />
     <ClCompile Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.c" />
+    <ClCompile Include="..\nRF5x\components\libraries\block_dev\sdc\nrf_block_dev_sdc.c" />
+    <ClCompile Include="..\nRF5x\components\libraries\sdcard\app_sdcard.c" />
+    <ClCompile Include="..\nRF5x\external\fatfs\port\diskio_blkdev.c" />
+    <ClCompile Include="..\nRF5x\external\fatfs\src\ff.c" />
+    <ClCompile Include="..\nRF5x\integration\nrfx\legacy\nrf_drv_spi.c" />
+    <ClCompile Include="..\nRF5x\modules\nrfx\mdk\gcc_startup_nrf52840.S" />
+    <ClCompile Include="..\nRF5x\modules\nrfx\mdk\system_nrf52840.c" />
     <ClCompile Include="app.c" />
     <ClCompile Include="main.c" />
     <None Include="nrf5x.props" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\mdk\system_nrf52840.c" />
-    <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\mdk\gcc_startup_nrf52840.S" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_advertising\ble_advertising.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\ble_services\ble_bas\ble_bas.c" />
     <ClCompile Include="$(BSP_ROOT)\nRF5x\components\ble\common\ble_advdata.c" />
@@ -191,6 +196,9 @@
     <ClCompile Include="$(BSP_ROOT)\nRF5x\modules\nrfx\soc\nrfx_atomic.c" />
     <ClInclude Include="..\nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.h" />
     <ClInclude Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.h" />
+    <ClInclude Include="..\nRF5x\modules\nrfx\templates\nRF52840\nrfx_config.h" />
+    <ClInclude Include="..\nRF5x\modules\nrfx\templates\nrfx_glue.h" />
+    <ClInclude Include="..\nRF5x\modules\nrfx\templates\nrfx_log.h" />
     <ClInclude Include="app_config.h" />
     <ClInclude Include="sdk_config.h" />
     <ClInclude Include="nrf_peripherals.h" />
@@ -518,7 +526,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">false</ExcludedFromBuild>
     </ClCompile>
     <ClInclude Include="FreeRTOSConfig.h" />
-    <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\config\FreeRTOSConfig.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\CMSIS\nrf52\portmacro_cmsis.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\portable\GCC\nrf52\portmacro.h" />
     <ClInclude Include="$(BSP_ROOT)\nRF5x\external\freertos\source\include\croutine.h" />
