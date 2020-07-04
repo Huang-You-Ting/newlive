@@ -87,6 +87,10 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "semphr.h"
+
 #define DEVICE_NAME                     "Nordic_Template"                       /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME               "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                300                                     /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
@@ -95,13 +99,13 @@
 #define APP_BLE_OBSERVER_PRIO           3                                       /**< Application's BLE observer priority. You shouldn't need to modify this value. */
 #define APP_BLE_CONN_CFG_TAG            1                                       /**< A tag identifying the SoftDevice BLE configuration. */
 
-#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(100, UNIT_1_25_MS)        /**< Minimum acceptable connection interval (0.1 seconds). */
-#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(200, UNIT_1_25_MS)        /**< Maximum acceptable connection interval (0.2 second). */
+#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(8, UNIT_1_25_MS)        /**< Minimum acceptable connection interval (0.1 seconds). */
+#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(8, UNIT_1_25_MS)        /**< Maximum acceptable connection interval (0.2 second). */
 #define SLAVE_LATENCY                   0                                       /**< Slave latency. */
 #define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(4000, UNIT_10_MS)         /**< Connection supervisory timeout (4 seconds). */
 
-#define FIRST_CONN_PARAMS_UPDATE_DELAY  APP_TIMER_TICKS(5000)                   /**< Time from initiating event (connect or start of notification) to first time sd_ble_gap_conn_param_update is called (5 seconds). */
-#define NEXT_CONN_PARAMS_UPDATE_DELAY   APP_TIMER_TICKS(30000)                  /**< Time between each call to sd_ble_gap_conn_param_update after the first call (30 seconds). */
+#define FIRST_CONN_PARAMS_UPDATE_DELAY  APP_TIMER_TICKS(100)                   /**< Time from initiating event (connect or start of notification) to first time sd_ble_gap_conn_param_update is called (5 seconds). */
+#define NEXT_CONN_PARAMS_UPDATE_DELAY   APP_TIMER_TICKS(1000)                  /**< Time between each call to sd_ble_gap_conn_param_update after the first call (30 seconds). */
 #define MAX_CONN_PARAMS_UPDATE_COUNT    3                                       /**< Number of attempts before giving up the connection parameter negotiation. */
 
 #define SEC_PARAM_BOND                  1                                       /**< Perform bonding. */
@@ -121,7 +125,7 @@ NRF_BLE_QWR_DEF(m_qwr);                                                         
 BLE_ADVERTISING_DEF(m_advertising);                                             /**< Advertising module instance. */
 BLE_NUS_DEF(m_nus, 1); 
 static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID;                        /**< Handle of the current connection. */
-
+static SemaphoreHandle_t prvSemi;
 /* YOUR_JOB: Declare all services structure your application is using
  *  BLE_XYZ_DEF(m_xyz);
  */
@@ -251,26 +255,50 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
     APP_ERROR_HANDLER(nrf_error);
 }
 
+void vUpdateData(void *pvSrc, uint32_t ulSize) {
+    uint32_t loops = ulSize / BLE_NUS_MAX_DATA_LEN;
+    uint32_t remaining =  ulSize % BLE_NUS_MAX_DATA_LEN;
+    uint8_t *pucSrc = pvSrc;
+    for (int i = 0; i < loops; i++) {
+        uint16_t length = BLE_NUS_MAX_DATA_LEN;
+        while (ble_nus_data_send(&m_nus, pucSrc, &length, m_conn_handle) != NRF_SUCCESS) {
+            xSemaphoreTake(prvSemi, portMAX_DELAY);
+        }
+    }
+    if(remaining) {
+        uint16_t length = remaining;
+        while (ble_nus_data_send(&m_nus, pucSrc, &length, m_conn_handle) != NRF_SUCCESS) {
+            xSemaphoreTake(prvSemi, portMAX_DELAY);
+        }        
+    }
+}
 
 static void on_nus_data_handler(ble_nus_evt_t * p_evt) {
     switch (p_evt->type) {
-    case BLE_NUS_EVT_RX_DATA: /**< Data received. */ {
-            uint8_t *pBuf = pvPortMalloc(p_evt->params.rx_data.length + 1);
-            memcpy(pBuf, p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
-            pBuf[p_evt->params.rx_data.length] = '\0';
-            uint16_t length = p_evt->params.rx_data.length;
-            ble_nus_data_send(&m_nus, pBuf, &length, m_conn_handle);
-            vPortFree(pBuf);
-        }    
+    case BLE_NUS_EVT_RX_DATA: /**< Data received. */ 
+        NRF_LOG_INFO("BLE_NUS_EVT_RX_DATA");            
+        {
+            extern void vAppFileNameSet(void *pvSrc, uint32_t ulSize);
+            vAppFileNameSet((void *)p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
+        }
         break;
     case BLE_NUS_EVT_TX_RDY:/**< Service is ready to accept new data to be transmitted. */
         NRF_LOG_INFO("BLE_NUS_EVT_TX_RDY");
+        xSemaphoreGive(prvSemi);
         break;
     case BLE_NUS_EVT_COMM_STARTED: /**< Notification has been enabled. */
         NRF_LOG_INFO("BLE_NUS_EVT_COMM_STARTED");
+        {
+            extern void vAppNotifyEnble(void);
+            vAppNotifyEnble();
+        }
         break;
     case BLE_NUS_EVT_COMM_STOPPED: /**< Notification has been disabled. */
         NRF_LOG_INFO("BLE_NUS_EVT_COMM_STOPPED");
+        {
+            extern void vAppNotifyDisble(void);
+            vAppNotifyDisble();
+        }
         break;
     default:
         // No implementation needed.
@@ -296,6 +324,9 @@ static void services_init(void)
     nus_init.data_handler = on_nus_data_handler;
     err_code = ble_nus_init(&m_nus, &nus_init);
     APP_ERROR_CHECK(err_code);    
+    prvSemi = xSemaphoreCreateBinary();
+    
+    
 }
 
 
@@ -698,6 +729,8 @@ static void prvCreateSetupTask(void *pContext) {
     services_init();
     conn_params_init();
     peer_manager_init();
+    extern void vAppInit(void);
+    vAppInit();
     // Start execution.
     NRF_LOG_INFO("Template example started.");
     application_timers_start();
