@@ -113,31 +113,33 @@ typedef struct
     bool    use_easy_dma;
 } nrf_drv_spi_t;
 
-/**
- * @brief Macro for creating an SPI master driver instance.
- */
+    /**
+     * @brief Macro for creating an SPI master driver instance.
+     */
 #define NRF_DRV_SPI_INSTANCE(id)    NRF_DRV_SPI_INSTANCE_(id)
 #define NRF_DRV_SPI_INSTANCE_(id)   NRF_DRV_SPI_INSTANCE_ ## id
 #if NRFX_CHECK(NRFX_SPIM0_ENABLED)
-    #define NRF_DRV_SPI_INSTANCE_0 \
-        { 0, { .spim = NRFX_SPIM_INSTANCE(0) }, true }
+#define NRF_DRV_SPI_INSTANCE_0 \
+             { 0, { .spim = NRFX_SPIM_INSTANCE(0) }, true }
 #elif NRFX_CHECK(NRFX_SPI0_ENABLED)
-    #define NRF_DRV_SPI_INSTANCE_0 \
-        { 0, { .spi = NRFX_SPI_INSTANCE(0) }, false }
+#define NRF_DRV_SPI_INSTANCE_0 \
+                     { 0, { .spi = NRFX_SPI_INSTANCE(0) }, false }
 #endif
 #if NRFX_CHECK(NRFX_SPIM1_ENABLED)
-    #define NRF_DRV_SPI_INSTANCE_1 \
-        { 1, { .spim = NRFX_SPIM_INSTANCE(1) }, true }
+#define NRF_DRV_SPI_INSTANCE_1 \
+                             { 1, { .spim = NRFX_SPIM_INSTANCE(1) }, true }
 #elif NRFX_CHECK(NRFX_SPI1_ENABLED)
-    #define NRF_DRV_SPI_INSTANCE_1 \
-        { 1, { .spi = NRFX_SPI_INSTANCE(1) }, false }
+#define NRF_DRV_SPI_INSTANCE_1 { 1, { .spi = NRFX_SPI_INSTANCE(1) }, false }
 #endif
 #if NRFX_CHECK(NRFX_SPIM2_ENABLED)
-    #define NRF_DRV_SPI_INSTANCE_2 \
-        { 2, { .spim = NRFX_SPIM_INSTANCE(2) }, true }
+#define NRF_DRV_SPI_INSTANCE_2 { 2, { .spim = NRFX_SPIM_INSTANCE(2) }, true }
 #elif NRFX_CHECK(NRFX_SPI2_ENABLED)
-    #define NRF_DRV_SPI_INSTANCE_2 \
-        { 2, { .spi = NRFX_SPI_INSTANCE(2) }, false }
+#define NRF_DRV_SPI_INSTANCE_2 { 2, { .spi = NRFX_SPI_INSTANCE(2) }, false }
+#endif
+#if NRFX_CHECK(NRFX_SPIM3_ENABLED)
+#define NRF_DRV_SPI_INSTANCE_3 { 3, { .spim = NRFX_SPIM_INSTANCE(3) }, true }
+#elif NRFX_CHECK(NRFX_SPI3_ENABLED)
+#define NRF_DRV_SPI_INSTANCE_3 { 3, { .spi = NRFX_SPI_INSTANCE(3) }, false }
 #endif
 
 /**
@@ -483,7 +485,7 @@ void nrf_drv_spi_uninit(nrf_drv_spi_t const * p_instance)
     }
     else if (NRF_DRV_SPI_USE_SPI)
     {
-        nrfx_spi_uninit(&p_instance->u.spi);
+        //nrfx_spi_uninit(&p_instance->u.spi);
     }
 }
 
