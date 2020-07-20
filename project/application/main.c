@@ -282,26 +282,30 @@ void vUpdateData(void *pvSrc, uint32_t ulSize) {
 static void on_nus_data_handler(ble_nus_evt_t * p_evt) {
     switch (p_evt->type) {
     case BLE_NUS_EVT_RX_DATA: /**< Data received. */ 
-        NRF_LOG_INFO("BLE_NUS_EVT_RX_DATA");            
         {
-            extern void vAppFileNameSet(void *pvSrc, uint32_t ulSize);
-            vAppFileNameSet((void *)p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
+            NRF_LOG_INFO("BLE_NUS_EVT_RX_DATA");            
+            extern void vAppReceiveCb(void *pvSrc, uint32_t ulSize);
+            vAppReceiveCb((void *)p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
         }
         break;
     case BLE_NUS_EVT_TX_RDY:/**< Service is ready to accept new data to be transmitted. */
-        NRF_LOG_INFO("BLE_NUS_EVT_TX_RDY");
-        xSemaphoreGive(prvSemi);
+        {
+            NRF_LOG_INFO("BLE_NUS_EVT_TX_RDY");
+            extern void vAppSendAvaliable(void);
+            vAppSendAvaliable();
+        }
+
         break;
     case BLE_NUS_EVT_COMM_STARTED: /**< Notification has been enabled. */
-        NRF_LOG_INFO("BLE_NUS_EVT_COMM_STARTED");
         {
+            NRF_LOG_INFO("BLE_NUS_EVT_COMM_STARTED");
             extern void vAppNotifyEnble(void);
             vAppNotifyEnble();
         }
         break;
     case BLE_NUS_EVT_COMM_STOPPED: /**< Notification has been disabled. */
-        NRF_LOG_INFO("BLE_NUS_EVT_COMM_STOPPED");
         {
+            NRF_LOG_INFO("BLE_NUS_EVT_COMM_STOPPED");
             extern void vAppNotifyDisble(void);
             vAppNotifyDisble();
         }

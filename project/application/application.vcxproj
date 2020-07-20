@@ -71,8 +71,6 @@
     <ClCompile Include="..\nRF5x\components\ble\ble_services\ble_nus\ble_nus.c" />
     <ClCompile Include="..\nRF5x\components\libraries\block_dev\sdc\nrf_block_dev_sdc.c" />
     <ClCompile Include="..\nRF5x\components\libraries\sdcard\app_sdcard.c" />
-    <ClCompile Include="..\nRF5x\external\fatfs\port\diskio_blkdev.c" />
-    <ClCompile Include="..\nRF5x\external\fatfs\src\ff.c" />
     <ClCompile Include="..\nRF5x\integration\nrfx\legacy\nrf_drv_spi.c" />
     <ClCompile Include="..\nRF5x\modules\nrfx\mdk\gcc_startup_nrf52840.S" />
     <ClCompile Include="..\nRF5x\modules\nrfx\mdk\system_nrf52840.c" />

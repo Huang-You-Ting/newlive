@@ -25,9 +25,6 @@
     <Filter Include="Source files\lib">
       <UniqueIdentifier>{e6b754fe-7519-4689-aba7-850eec89ed3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\fatfs">
-      <UniqueIdentifier>{738612e0-82de-494c-bfca-2fff04e5d4d5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source files\lib\app">
       <UniqueIdentifier>{6673909b-1010-4b34-930e-ee6a8cb955c0}</UniqueIdentifier>
     </Filter>
@@ -266,12 +263,6 @@
     </ClCompile>
     <ClCompile Include="app.c">
       <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\nRF5x\external\fatfs\port\diskio_blkdev.c">
-      <Filter>Source files\fatfs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\nRF5x\external\fatfs\src\ff.c">
-      <Filter>Source files\fatfs</Filter>
     </ClCompile>
     <ClCompile Include="..\nRF5x\components\libraries\block_dev\sdc\nrf_block_dev_sdc.c">
       <Filter>Source files\lib\nrf</Filter>
