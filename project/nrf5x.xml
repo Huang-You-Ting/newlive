@@ -27,7 +27,7 @@
       <CFLAGS>-std=c99</CFLAGS>
       <CXXFLAGS>-std=c99</CXXFLAGS>
       <LDFLAGS>--specs=nano.specs --specs=nosys.specs</LDFLAGS>
-      <LinkerScript>$$SYS:BSP_ROOT$$/nRF5x/LinkerScripts/nRF52840_XXAA_S140.lds</LinkerScript>
+      <LinkerScript />
       <COMMONFLAGS>-mabi=aapcs  -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard</COMMONFLAGS>
       <EnableLinkerGroups>true</EnableLinkerGroups>
     </CompilationFlags>

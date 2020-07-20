@@ -14,14 +14,10 @@
 	</ItemDefinitionGroup>
 	<ItemDefinitionGroup>
 		<Link>
-			<LinkerScript Condition="'%(Link.LinkerScript)' == ''">$(BSP_ROOT)/nRF5x/LinkerScripts/nRF52840_XXAA_S140.lds</LinkerScript>
 			<LibrarySearchDirectories>$(BSP_ROOT)/nRF5x/SoftdeviceLibraries;$(BSP_ROOT)/nRF5x/LinkerScripts;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
 			<AdditionalOptions>--specs=nano.specs --specs=nosys.specs -mabi=aapcs %(Link.AdditionalOptions)</AdditionalOptions>
 		</Link>
 	</ItemDefinitionGroup>
-	<PropertyGroup>
-		<DefaultLinkerScript>$(BSP_ROOT)/nRF5x/LinkerScripts/nRF52840_XXAA_S140.lds</DefaultLinkerScript>
-	</PropertyGroup>
 
 	<ItemDefinitionGroup>
 		<ClCompile>
