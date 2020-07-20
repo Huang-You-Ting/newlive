@@ -31,14 +31,17 @@
     <Filter Include="Header files\freertos">
       <UniqueIdentifier>{f830ce6d-f6fb-47a6-9598-b192ca8cfde5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\log">
-      <UniqueIdentifier>{7144d798-06f4-49a9-98f8-a65c026e9c65}</UniqueIdentifier>
+    <Filter Include="Source files\ble">
+      <UniqueIdentifier>{f6fc80f3-5064-43e3-a458-a3546f89a506}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\memobj">
-      <UniqueIdentifier>{9a975549-65fc-44de-9709-5630c628ab5d}</UniqueIdentifier>
+    <Filter Include="Source files\app">
+      <UniqueIdentifier>{b538fb23-65e0-4918-a7a2-afde9e097b8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source files\nrf_fprintf">
-      <UniqueIdentifier>{a26cdda0-397e-400e-b66e-673d57934d87}</UniqueIdentifier>
+    <Filter Include="Source files\bsp">
+      <UniqueIdentifier>{1609b46c-92fd-471a-a7f0-e0c6abaa253a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\nrf">
+      <UniqueIdentifier>{e10d79ab-1c96-4675-bf77-f61e09a2623e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +141,6 @@
     <ClCompile Include="nRF5x\external\freertos\Source\portable\MemMang\heap_4.c">
       <Filter>Source files\freertos</Filter>
     </ClCompile>
-    <None Include="nRF5x\modules\nrfx\mdk\gcc_startup_nrf52840.S">
-      <Filter>Source files</Filter>
-    </None>
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\ble\ble_advertising\ble_advertising.h">
       <Filter>Header files\Device-specific files</Filter>
     </ClInclude>
@@ -1074,6 +1074,9 @@
     <ClInclude Include="$(BSP_ROOT)\nRF5x\components\drivers_nrf\twi_master\deprecated\twi_master.h">
       <Filter>Header files\Device-specific files</Filter>
     </ClInclude>
+    <None Include="nRF5x\modules\nrfx\mdk\gcc_startup_nrf52840.S">
+      <Filter>Source files\Device-specific files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="nRF5x\external\freertos\Source\Include\message_buffer.h">
@@ -1142,35 +1145,101 @@
     <ClCompile Include="Code\app.c">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="nRF5x\modules\nrfx\mdk\system_nrf52840.c">
-      <Filter>Source files</Filter>
+    <ClCompile Include="nRF5x\components\ble\ble_advertising\ble_advertising.c">
+      <Filter>Source files\ble</Filter>
     </ClCompile>
-    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_frontend.c">
-      <Filter>Source files\log</Filter>
+    <ClCompile Include="nRF5x\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c">
+      <Filter>Source files\ble</Filter>
     </ClCompile>
-    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_str_formatter.c">
-      <Filter>Source files\log</Filter>
+    <ClCompile Include="nRF5x\components\ble\ble_services\ble_bas\ble_bas.c">
+      <Filter>Source files\ble</Filter>
     </ClCompile>
-    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_backend_flash.c">
-      <Filter>Source files\log</Filter>
+    <ClCompile Include="nRF5x\components\libraries\strerror\nrf_strerror.c">
+      <Filter>Source files\freertos</Filter>
     </ClCompile>
-    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_backend_rtt.c">
-      <Filter>Source files\log</Filter>
+    <ClCompile Include="nRF5x\components\libraries\bsp\bsp.c">
+      <Filter>Source files\ble</Filter>
     </ClCompile>
-    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_default_backends.c">
-      <Filter>Source files\log</Filter>
+    <ClCompile Include="nRF5x\components\boards\boards.c">
+      <Filter>Source files\bsp</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\ble\ble_services\ble_nus\ble_nus.c">
+      <Filter>Source files\ble</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\ble\common\ble_advdata.c">
+      <Filter>Source files\ble</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\ble\common\ble_conn_params.c">
+      <Filter>Source files\ble</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\ble\common\ble_conn_state.c">
+      <Filter>Source files\ble</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\ble\common\ble_srv_common.c">
+      <Filter>Source files\ble</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\util\app_error.c">
+      <Filter>Source files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\util\app_error_handler_gcc.c">
+      <Filter>Source files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\util\app_util_platform.c">
+      <Filter>Source files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\timer\app_timer.c">
+      <Filter>Source files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\util\app_error_weak.c">
+      <Filter>Source files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\atomic\nrf_atomic.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\balloc\nrf_balloc.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\ble\nrf_ble_gatt\nrf_ble_gatt.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\util\nrf_assert.c">
+      <Filter>Source files\nrf</Filter>
     </ClCompile>
     <ClCompile Include="nRF5x\components\libraries\memobj\nrf_memobj.c">
-      <Filter>Source files\memobj</Filter>
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_backend_flash.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_backend_rtt.c">
+      <Filter>Source files\nrf</Filter>
     </ClCompile>
     <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_backend_serial.c">
-      <Filter>Source files\log</Filter>
+      <Filter>Source files\nrf</Filter>
     </ClCompile>
-    <ClCompile Include="nRF5x\external\fprintf\nrf_fprintf.c">
-      <Filter>Source files\nrf_fprintf</Filter>
+    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_default_backends.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_frontend.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\log\src\nrf_log_str_formatter.c">
+      <Filter>Source files\nrf</Filter>
     </ClCompile>
     <ClCompile Include="nRF5x\external\fprintf\nrf_fprintf_format.c">
-      <Filter>Source files\nrf_fprintf</Filter>
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\external\fprintf\nrf_fprintf.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\ble\nrf_ble_qwr\nrf_ble_qwr.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\components\libraries\atomic_flags\nrf_atflags.c">
+      <Filter>Source files\nrf</Filter>
+    </ClCompile>
+    <ClCompile Include="nRF5x\modules\nrfx\mdk\system_nrf52840.c">
+      <Filter>Source files\Device-specific files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
