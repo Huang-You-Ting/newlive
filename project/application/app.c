@@ -13,6 +13,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
+#include "stream_buffer.h"
 
 #include <string.h>
 
@@ -35,6 +36,7 @@ NRF_BLOCK_DEV_SDC_DEFINE(
 
 static SemaphoreHandle_t prvMutex;
 static SemaphoreHandle_t prvSemi;
+static StreamBufferHandle_t prvSendStream;
 
 static char prvFileName[256];
 
@@ -136,6 +138,9 @@ static void prvFatfsInit(void)
     return;
 }
 
+static uint32_t prvExpectSend; 
+static uint32_t prvActualSend; 
+static TickType_t t0;
 static void prvAppTask(void* pArg) {
     NRF_LOG_INFO("FATFS example started.");
     prvFatfsInit();
@@ -145,7 +150,7 @@ static void prvAppTask(void* pArg) {
         
         xSemaphoreTake(prvSemi, portMAX_DELAY);   
         
-        TickType_t t0 = xTaskGetTickCount();
+        t0 = xTaskGetTickCount();
         
         ff_result = f_stat(prvFileName, &fno);
         if (ff_result != FR_OK) {
@@ -164,7 +169,9 @@ static void prvAppTask(void* pArg) {
         }
 
         uint32_t ulExpectSend = fno.fsize;
-        
+        prvExpectSend = fno.fsize;
+        prvActualSend = 0;
+        t0 = xTaskGetTickCount();
         while (ulExpectSend) {
             uint32_t bytes_read = 0;
             ff_result = f_read(&file,
@@ -178,28 +185,42 @@ static void prvAppTask(void* pArg) {
                 NRF_LOG_INFO("%d bytes read.", bytes_read);
             }
             ulExpectSend -= bytes_read;
-            extern void vUpdateData(void *pvSrc, uint32_t ulSize);
-            if (bBleNotifyIsEnable) {
-                vUpdateData(pseudoData, bytes_read);		 
-            }
+            xStreamBufferSend(prvSendStream, pseudoData, bytes_read, portMAX_DELAY);
         }
 
         (void) f_close(&file);
-        
-        
-        NRF_LOG_INFO("send %d bytes, take %ld ms. ( %d kbps)", 
-            fno.fsize, 
-            xTaskGetTickCount() - t0,
-            ((fno.fsize) * 1000)/((xTaskGetTickCount() - t0) * 1024) * 8
-            );       
+
     }
     
 }
 
 
+
+static void prvNotifyTask(void* pArg) {
+    for (;;) {
+        static uint8_t prvBuf[BLE_NUS_MAX_DATA_LEN];
+        uint32_t bytes_read = xStreamBufferReceive(prvSendStream,
+            prvBuf,
+            sizeof(prvBuf),
+            portMAX_DELAY);
+        extern void vUpdateData(void *pvSrc, uint32_t ulSize);
+        if (bBleNotifyIsEnable && bytes_read > 0) {
+            vUpdateData(prvBuf, bytes_read);		 
+            prvActualSend += bytes_read;
+            if (prvActualSend == prvExpectSend) {
+                NRF_LOG_INFO("send %d bytes, take %ld ms. ( %d kbps)", 
+                    fno.fsize, 
+                    xTaskGetTickCount() - t0,
+                    ((fno.fsize) * 1000)/((xTaskGetTickCount() - t0) * 1024) * 8);   
+            }
+        }
+    }
+}
 void vAppInit(void) {
     prvSemi = xSemaphoreCreateBinary();
+    prvSendStream = xStreamBufferCreate(BLE_NUS_MAX_DATA_LEN * 12, 1);
     xTaskCreate(prvAppTask, "app", 4096, NULL, 3, NULL);
+    xTaskCreate(prvNotifyTask, "notify", 2048, NULL, 3, NULL);
 }
 
 void vAppFileNameSet(void *pvSrc, uint32_t ulSize) {    
